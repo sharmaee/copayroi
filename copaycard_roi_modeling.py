@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-st.title('Understand how accumulators and maximizers impact your bottomline.')
+st.set_page_config(page_title="Lamar Health ROI Calculator")
 
+st.markdown("<h1 style='text-align: center;'>Impact of copay accumulators and maximizers on manufacturer bottomline!</h1>", unsafe_allow_html=True)
 # Function to calculate gross and net revenue for each category
 def calculate_revenues(num_patients, price, manufacturer_copay, max_copay, num_cannot_afford):
     # Placeholder for calculation logic
@@ -51,7 +52,7 @@ def main():
         max_copay = st.number_input("Maximum Copay", value=16000)
         num_cannot_afford = st.number_input("Number of Patients Who Can't Afford Out-of-Pocket Costs", value=100)
 
-        submit_button = st.form_submit_button("Calculate Revenues")
+        submit_button = st.form_submit_button("Calculate Revenues", type="primary")
 
         if submit_button:
             # Perform calculations
@@ -59,16 +60,16 @@ def main():
     
             # Format the numbers in the DataFrame
             formatted_df = revenue_df.copy()
-            formatted_df["Gross Revenue"] = formatted_df["Gross Revenue"].apply(lambda x: f"${x:,.2f}")
-            formatted_df["Manufacturer Costs"] = formatted_df["Manufacturer Costs"].apply(lambda x: f"${x:,.2f}")
-            formatted_df["Net Revenue"] = formatted_df["Net Revenue"].apply(lambda x: f"${x:,.2f}")
-            formatted_df["Lost Revenue"] = formatted_df["Lost Revenue"].apply(lambda x: f"${x:,.2f}")
+            formatted_df["Gross Revenue"] = formatted_df["Gross Revenue"].apply(lambda x: f"${x:,.0f}")
+            formatted_df["Manufacturer Costs"] = formatted_df["Manufacturer Costs"].apply(lambda x: f"${x:,.0f}")
+            formatted_df["Net Revenue"] = formatted_df["Net Revenue"].apply(lambda x: f"${x:,.0f}")
+            formatted_df["Lost Revenue"] = formatted_df["Lost Revenue"].apply(lambda x: f"${x:,.0f}")
 
             # Reset and drop the index
-            formatted_df.reset_index(drop=True, inplace=True)
+            # formatted_df.reset_index(drop=True, inplace=True)
             
             # Display the DataFrame using st.dataframe
-            st.dataframe(formatted_df)
+            st.dataframe(formatted_df.style.highlight_between(left="$0", inclusive="neither", subset=["Lost Revenue"], color="red"));
 
 if __name__ == "__main__":
     main()
