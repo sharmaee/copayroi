@@ -54,11 +54,9 @@ st.data_editor(
         "avg_wholesale_price": st.column_config.NumberColumn(
             "Price of Product",
             help="Wholesale Acquisition Cost (WAC) of the Therapy",
-            format="$%d",
         ),
         "gross_annual_revenue": st.column_config.NumberColumn(
             "Gross Annual Revenue",
-            format="$%d",
         ),
         "enrolled_copay_accumulator": st.column_config.Column(
             "Number of Patients in Accumulator Programs",
@@ -74,7 +72,6 @@ st.data_editor(
         "lost_revenue_discontinuation": st.column_config.NumberColumn(
             "Lost Revenue",
             help="The amount of revenue lost to manufacturer due to discontinuation.",
-            format="$%d",
         ),
     },
 )
